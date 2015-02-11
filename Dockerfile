@@ -16,6 +16,9 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ADD ./default /etc/nginx/sites-available/default
 
+ADD run.sh /run.sh
+RUN chmod 755 /*.sh
+
 EXPOSE 80
 
-CMD service php5-fpm start && nginx
+CMD ["/run.sh"]
