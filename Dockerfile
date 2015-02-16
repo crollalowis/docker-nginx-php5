@@ -10,8 +10,6 @@ RUN apt-get -y install php5-fpm php5-mysql php-apc php5-imagick php5-imap php5-m
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/
 RUN mv /usr/bin/composer.phar /usr/bin/composer
 
-RUN echo "<?php phpinfo(); ?>" > /srv/www/phpinfo.php
-
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ADD ./default /etc/nginx/sites-available/default
