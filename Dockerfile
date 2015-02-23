@@ -14,6 +14,9 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ADD ./default /etc/nginx/sites-available/default
 
+# Give www-data write access to mounted volumes
+RUN usermod -u 1000 www-data
+
 ADD run.sh /run.sh
 RUN chmod 755 /*.sh
 
