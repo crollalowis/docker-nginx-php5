@@ -20,6 +20,9 @@ RUN usermod -u 1000 www-data
 ADD run.sh /run.sh
 RUN chmod 755 /*.sh
 
+# activate extensions
+RUN php5enmod mcrypt
+
 EXPOSE 80
 
 CMD ["/run.sh"]
