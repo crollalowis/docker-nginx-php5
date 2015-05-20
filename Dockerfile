@@ -6,13 +6,19 @@ RUN apt-get -y install software-properties-common
 RUN add-apt-repository -y ppa:ufirst/php5
 RUN apt-get update
 
-RUN apt-get -y install php5-fpm php5-mysql php-apc php5-imagick php5-imap php5-mcrypt php5-curl php5-cli php5-gd php5-pgsql php5-sqlite php5-common php-pear curl php5-json memcached php5-memcache
+RUN apt-get -y install php5-fpm php5-mysql php5-imagick php5-imap php5-mcrypt php5-curl php5-cli php5-gd php5-pgsql php5-sqlite php5-common php-pear curl php5-json memcached php5-memcache php5-xdebug
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/
 RUN mv /usr/bin/composer.phar /usr/bin/composer
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ADD ./default /etc/nginx/sites-available/default
+
+# Enable Xdebug remote_connect_back
+RUN echo "xdebug.remote_connect_back=On" >> /etc/php5/mods-available/xdebug.ini
+RUN echo "xdebug.remote_enable=On" >> /etc/php5/mods-available/xdebug.ini
+RUN echo "xdebug.remote_autostart=On" >> /etc/php5/mods-available/xdebug.ini
+RUN echo "xdebug.remote_log=/var/log/nginx/xdebug.log" >> /etc/php5/mods-available/xdebug.ini
 
 # Give www-data write access to mounted volumes
 RUN usermod -u 1000 www-data
