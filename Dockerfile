@@ -18,6 +18,7 @@ ADD ./default /etc/nginx/sites-available/default
 RUN echo "xdebug.remote_connect_back=On" >> /etc/php5/mods-available/xdebug.ini
 RUN echo "xdebug.remote_enable=On" >> /etc/php5/mods-available/xdebug.ini
 RUN echo "xdebug.remote_autostart=On" >> /etc/php5/mods-available/xdebug.ini
+RUN echo "xdebug.remote_port=9001" >> /etc/php5/mods-available/xdebug.ini
 RUN echo "xdebug.remote_log=/var/log/nginx/xdebug.log" >> /etc/php5/mods-available/xdebug.ini
 
 # Give www-data write access to mounted volumes
